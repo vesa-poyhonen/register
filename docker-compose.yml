@@ -1,8 +1,15 @@
 version: '2'
 services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
   web:
     build: .
     command: bundle exec puma -p 3000 -e development
+    depends_on:
+      - db
     environment:
       RAILS_ENV: development
     ports:
