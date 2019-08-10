@@ -1,0 +1,51 @@
+#!/bin/bash
+
+APPLICATION = "incubit"
+
+# --------------------------------------------------------------------------------
+
+function help {
+	echo "Runs specific actions inside or targeting the docker of current project."
+	echo ""
+	echo "  Usage: ${0} <ACTION>"
+	echo ""
+	echo "Where ACTION is one of the following:"
+	echo ""
+	echo "  bash            Opens bash console inside the docker."
+	echo "  run             Runs the docker."
+	echo "  build           (Re)builds the docker image."
+	echo "  clean           Deletes all unused docker data."
+	echo "  clean-build     (Re)builds the docker image with --no-cache."
+}
+
+# BASH ---------------------------------------------------------------------------
+if [ "bash" = "${1}" ] && [ ${#} -eq 1 ]; then
+	echo "Launching docker bash ..."
+	docker exec -it "${APPLICATION}_web_1" bash
+
+# RUN ----------------------------------------------------------------------------
+elif [ "run" = "${1}" ] && [ ${#} -eq 1 ]; then
+	echo "Launching docker ..."
+	docker-compose up
+
+# UP (Alias for RUN) -------------------------------------------------------------
+elif [ "up" = "${1}" ] && [ ${#} -eq 1 ]; then
+    echo "Launching docker ..."
+    docker-compose up
+	
+# BUILD --------------------------------------------------------------------------
+elif [[ "${1}" =~ ^(re)?build$ ]] && [ ${#} -eq 1 ]; then
+	echo "Building docker image ..."
+	docker-compose build
+
+# CLEAN-BUILD --------------------------------------------------------------------
+elif [[ "${1}" =~ ^clean[_-]?(re)?build$ ]] && [ ${#} -eq 1 ]; then
+    echo "Building docker image ..."
+    docker-compose build --no-cache
+
+# DELETE (deletes all unused data) -----------------------------------------------
+elif [ "clean" = "${1}" ] && [ ${#} -eq 1 ]; then
+    docker system prune --all --volumes
+else
+	help
+fi
