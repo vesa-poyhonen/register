@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def edit
-    # TODO: Secure this
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
   end
 
   def new
@@ -19,8 +18,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    # TODO: Secure this
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
     if @user.update_attributes(user_params)
       flash[:success] = "Your profile has been successfully updated"
       redirect_to edit_user_path(@user)
