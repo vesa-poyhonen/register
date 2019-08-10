@@ -1,17 +1,10 @@
 version: '2'
 services:
-  mailcatcher:
-    image: schickling/mailcatcher
-    ports:
-      - "1025:1025"
-      - "1080:1080"
   web:
     build: .
     command: bundle exec puma -p 3000 -e development
     environment:
       RAILS_ENV: development
-    links:
-      - mailcatcher
     ports:
       - "3000:3000"
     volumes:
