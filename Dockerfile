@@ -1,5 +1,4 @@
 FROM ruby:2.6.3
-MAINTAINER vesa.poyhonen@gmail.com
 
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive

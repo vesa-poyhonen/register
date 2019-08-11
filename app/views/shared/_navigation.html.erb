@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-  <a class="navbar-brand" href="<%= root_path %>">Ruby on Rails</a>
+  <a class="navbar-brand" href="<%= root_path %>">Application</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -7,17 +7,17 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if is_logged_in? && current_user %>
-        <li class="nav-item">
+        <li class="nav-item<%= ' active' if controller.controller_name == 'users' %>">
           <a class="nav-link" href="<%= edit_user_path(current_user) %>">My Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<%= logout_path %>">Logout</a>
         </li>
       <% else %>
-        <li class="nav-item active">
+        <li class="nav-item<%= ' active' if controller.controller_name == 'users' %>">
           <a class="nav-link" href="<%= register_path %>">Register</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item<%= ' active' if controller.controller_name == 'sessions' %>">
           <a class="nav-link" href="<%= login_path %>">Login</a>
         </li>
       <% end %>

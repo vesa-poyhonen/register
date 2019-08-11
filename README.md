@@ -23,6 +23,7 @@ User registration system in Ruby on Rails. The system would require following fe
 **Getting started**
 * Run <tt>dock build</tt> and <tt>dock run</tt> to build and start Docker
 * Access application at http://localhost:3000
+* Access docker by running <tt>dock bash</tt> and run tests <tt>rails test RAILS_ENV=test</tt>
 
 **Docker**
 * <tt>dock build</tt> (Re)builds the docker image

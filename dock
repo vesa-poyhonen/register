@@ -26,12 +26,12 @@ if [ "bash" = "${1}" ] && [ ${#} -eq 1 ]; then
 # RUN ----------------------------------------------------------------------------
 elif [ "run" = "${1}" ] && [ ${#} -eq 1 ]; then
 	echo "Launching docker ..."
-	docker-compose up
+	docker-compose up && docker exec -it "${APPLICATION}_web_1" rails db:migrate
 
 # UP (Alias for RUN) -------------------------------------------------------------
 elif [ "up" = "${1}" ] && [ ${#} -eq 1 ]; then
-    echo "Launching docker ..."
-    docker-compose up
+  echo "Launching docker ..."
+  docker-compose up && docker exec -it "${APPLICATION}_web_1" rails db:migrate
 	
 # BUILD --------------------------------------------------------------------------
 elif [[ "${1}" =~ ^(re)?build$ ]] && [ ${#} -eq 1 ]; then
