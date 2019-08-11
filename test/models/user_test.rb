@@ -2,20 +2,20 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(name: 'Example User', email: 'user@example.com', password: 'password', password_confirmation: 'password')
+    @user = users(:user)
   end
 
   test 'should be valid' do
     assert @user.valid?
   end
 
-  test 'name should be present' do
-    @user.name = ''
+  test 'username should be present' do
+    @user.username = ''
     assert_not @user.valid?
   end
 
   test 'email validation should accept valid addresses' do
-    valid_addresses = %w[somebody@example.com SOME@foo.COM A_BC-DE@foo.bar.org first.last@foo.jp alice+bob@baz.cn]
+    valid_addresses = %w[somebody.else@example.com SOME@foo.COM A_BC-DE@foo.bar.org first.last@foo.jp alice+bob@baz.cn]
     valid_addresses.each do |valid_address|
       @user.email = valid_address
       assert @user.valid?, "#{valid_address.inspect} should be valid"
@@ -38,7 +38,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'email addresses should be saved as lower-case' do
-    mixed_case_email = 'Somebody@ExAMPle.CoM'
+    mixed_case_email = 'Somebody.Else@ExAMPle.CoM'
     @user.email = mixed_case_email
     @user.save
     assert_equal mixed_case_email.downcase, @user.reload.email
@@ -50,7 +50,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'password should have a minimum length' do
-    @user.password = @user.password_confirmation = 'a' * 8
+    @user.password = @user.password_confirmation = 'a' * 7
     assert_not @user.valid?
   end
 end

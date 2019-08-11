@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  email: MyString
+user:
+  username: username
+  email: user@example.com
+  password_digest: <%= User.digest('password') %>
 
-two:
-  name: MyString
-  email: MyString
+user_with_token:
+  username: somebody
+  email: somebody@example.com
+  password_digest: <%= User.digest('password') %>
+  password_reset_digest: <%= User.digest('token') %>
+  password_reset_sent_at: <%= 1.hour.ago %>
