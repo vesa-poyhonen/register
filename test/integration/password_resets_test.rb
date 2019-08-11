@@ -91,4 +91,5 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_select 'div.alert-danger'
   end
+
 end

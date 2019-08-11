@@ -32,4 +32,5 @@ class UserRegistersTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select 'div.alert-success'
   end
+
 end
