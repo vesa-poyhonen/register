@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :authenticate_user, except: [:new, :create]
 
   def edit
+    return redirect_to edit_user_path(current_user) if current_user.id.to_i != params[:id].to_i
+
     @user = User.find(current_user.id)
   end
 
@@ -21,6 +23,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    return redirect_to edit_user_path(current_user) if current_user.id.to_i != params[:id].to_i
+
     @user = User.find(current_user.id)
     if @user.update_attributes(user_params)
       flash[:success] = "Your profile has been successfully updated"
